@@ -1,16 +1,19 @@
-; Function and method bodies
-(block "{" @indent.begin)
-(block "}" @indent.branch)
+; Block bodies (functions, methods, standalone blocks)
+(block
+  "{" @indent.begin
+  "}" @indent.branch)
 
-; Class body - target the member directly
+; Class body
 (class_declaration
-  member: (member) @indent.begin)
+  "{" @indent.begin
+  "}" @indent.branch)
 
-; Member (method) bodies  
-(member "{" @indent.begin)
-(member "}" @indent.branch)
+; Member (methods inside class)
+(member
+  "{" @indent.begin
+  "}" @indent.branch)
 
-; Braceless bodies
+; Braceless control flow bodies
 (if_statement
   consequence: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))
