@@ -21,7 +21,8 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($.declaration),
 
-    block: ($) => seq("{", repeat($.declaration), "}"),
+    block: ($) =>
+      seq(field("open", "{"), repeat($.declaration), field("close", "}")),
 
     // -------------------------------------------------------------------------
     // Declarations
@@ -58,9 +59,9 @@ module.exports = grammar({
         "class",
         field("name", $.identifier),
         optional(seq("<", field("superclass", $.identifier))),
-        "{",
+        field("open", "{"),
         repeat(field("member", $.member)),
-        "}",
+        field("close", "}"),
       ),
 
     member: ($) =>

@@ -153,7 +153,28 @@
   {
     "type": "block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "close": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
+      "open": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "{",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -220,6 +241,16 @@
     "type": "class_declaration",
     "named": true,
     "fields": {
+      "close": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
       "member": {
         "multiple": true,
         "required": false,
@@ -237,6 +268,16 @@
           {
             "type": "identifier",
             "named": true
+          }
+        ]
+      },
+      "open": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "{",
+            "named": false
           }
         ]
       },

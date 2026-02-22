@@ -1,19 +1,11 @@
-; Block bodies (functions, methods, standalone blocks)
 (block
-  "{" @indent.begin
-  "}" @indent.branch)
+  open: (_) @indent.begin
+  close: (_) @indent.branch)
 
-; Class body
 (class_declaration
-  "{" @indent.begin
-  "}" @indent.branch)
+  open: (_) @indent.begin
+  close: (_) @indent.branch)
 
-; Member (methods inside class)
-(member
-  "{" @indent.begin
-  "}" @indent.branch)
-
-; Braceless control flow bodies
 (if_statement
   consequence: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))

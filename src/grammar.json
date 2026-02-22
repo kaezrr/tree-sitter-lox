@@ -14,8 +14,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "{"
+          "type": "FIELD",
+          "name": "open",
+          "content": {
+            "type": "STRING",
+            "value": "{"
+          }
         },
         {
           "type": "REPEAT",
@@ -25,8 +29,12 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "}"
+          "type": "FIELD",
+          "name": "close",
+          "content": {
+            "type": "STRING",
+            "value": "}"
+          }
         }
       ]
     },
@@ -187,8 +195,12 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "{"
+          "type": "FIELD",
+          "name": "open",
+          "content": {
+            "type": "STRING",
+            "value": "{"
+          }
         },
         {
           "type": "REPEAT",
@@ -202,8 +214,12 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "}"
+          "type": "FIELD",
+          "name": "close",
+          "content": {
+            "type": "STRING",
+            "value": "}"
+          }
         }
       ]
     },
