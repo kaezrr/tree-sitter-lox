@@ -1,35 +1,40 @@
+; --- Literals & Keywords ---
 (number) @number
 (string) @string
 (comment) @comment
-
-"var" @keyword
-"fun" @keyword.function
-"class" @keyword
-"return" @keyword.return
-"print" @keyword
-"if" @keyword.conditional
-"else" @keyword.conditional
-"while" @keyword.repeat
-"for" @keyword.repeat
-"break" @keyword.repeat
-"and" @keyword.operator
-"or" @keyword.operator
-"true" @boolean
-"false" @boolean
+["true" "false"] @boolean
 "nil" @constant.builtin
-"this" @variable.builtin
-"super" @variable.builtin
 
+[
+  "var" "fun" "class" "return" "print" 
+  "if" "else" "while" "for" "break"
+] @keyword
+
+["and" "or"] @keyword.operator
+["this" "super"] @variable.builtin
+
+; --- Functions & Methods ---
+
+; 1. Built-in functions (Highest priority)
 ((call callee: (primary (identifier) @function.builtin))
  (#match? @function.builtin "^(clock|input|number|push|pop|len)$"))
+
+; 2. Declarations
 (fun_declaration name: (identifier) @function)
 (member name: (identifier) @function.method)
-(class_declaration name: (identifier) @type)
-(class_declaration superclass: (identifier) @type)
-(parameters (identifier) @variable.parameter)
+
+; 3. Calls
 (call callee: (primary (identifier) @function.call))
 (call property: (identifier) @function.method)
-(identifier) @variable
+
+; --- Types ---
+(class_declaration name: (identifier) @type)
+(class_declaration superclass: (identifier) @type)
+
+; --- Parameters & Variables ---
+(parameters (identifier) @variable.parameter)
+(var_declaration name: (identifier) @variable)
+(identifier) @variable  ; <--- FALLBACK (Keep at bottom)
 
 "+" @operator  "-" @operator  "*" @operator  "/" @operator
 "%" @operator  "=" @operator  "==" @operator  "!=" @operator
