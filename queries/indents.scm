@@ -1,28 +1,25 @@
-; Indent after opening braces
+; Function and method bodies
 (block "{" @indent.begin)
-(block "}" @indent.end)
+(block "}" @indent.branch)
 
-; Indent inside class body
-(class_declaration "{" @indent.begin)
-(class_declaration "}" @indent.end)
+; Class body - target the member directly
+(class_declaration
+  member: (member) @indent.begin)
 
-; Indent inside if/else/while/for bodies that aren't blocks
+; Member (method) bodies  
+(member "{" @indent.begin)
+(member "}" @indent.branch)
+
+; Braceless bodies
 (if_statement
   consequence: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))
-
 (if_statement
   alternative: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))
-
 (while_statement
   body: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))
-
 (for_statement
   body: (_) @indent.begin
   (#not-kind-eq? @indent.begin "block"))
-
-; Align closing braces with opening line
-(block "}" @indent.branch)
-(class_declaration "}" @indent.branch)
